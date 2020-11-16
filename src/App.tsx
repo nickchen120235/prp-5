@@ -1,26 +1,27 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from 'react'
+import { Switch, Route } from 'react-router-dom'
+import { AppBar, Toolbar, Typography } from '@material-ui/core'
 
-function App() {
+import Home from './pages/Home'
+import Multi from './pages/Multi'
+import TwoCountry from './pages/TwoCountry'
+
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <>
+      <AppBar elevation={0}>
+        <Toolbar>
+          <Typography variant='h4' align='center'>PRP Assignment 5</Typography>
+        </Toolbar>
+      </AppBar>
+      <Toolbar />
+      <Switch>
+        <Route path='/' exact><Home /></Route>
+        <Route path='/multi' exact><Multi /></Route>
+        <Route path='/twocountry' exact><TwoCountry /></Route>
+      </Switch>
+    </>
+  )
 }
 
-export default App;
+export default App
