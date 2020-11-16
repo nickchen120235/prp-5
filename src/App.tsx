@@ -4,7 +4,7 @@ import { AppBar, Toolbar, Typography, IconButton, Drawer, List, ListItem, ListIt
 import { Menu } from '@material-ui/icons'
 
 import Home from './pages/Home'
-import Multi from './pages/Multi'
+import MultiCountry from './pages/MultiCountry'
 import MultiSeries from './pages/MultiSeries'
 
 import useStyles from './utils/styles'
@@ -31,7 +31,7 @@ const App = () => {
       <Toolbar />
       <Switch>
         <Route path='/' exact><Home /></Route>
-        <Route path='/multi' exact><Multi /></Route>
+        <Route path='/multi' exact><MultiCountry /></Route>
         <Route path='/multiseries' exact><MultiSeries setTitle={handleTitleChange} /></Route>
       </Switch>
       <Drawer anchor='left' open={menuOpen} onClose={() => setMenuOpen(false)}>
