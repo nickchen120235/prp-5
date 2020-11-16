@@ -20,8 +20,8 @@
     "react-dom": "^17.0.1",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.0",
-    "recharts": "^1.8.5",
     "typescript": "^4.0.3",
+    "victory": "^35.3.5",
     "web-vitals": "^0.2.4"
   },
   "scripts": {
@@ -51,6 +51,7 @@
     ]
   },
   "devDependencies": {
+    "@types/victory": "^33.1.4",
     "@typescript-eslint/eslint-plugin": "^4.5.0",
     "@typescript-eslint/parser": "^4.5.0",
     "eslint": "^7.12.0",
