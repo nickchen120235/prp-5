@@ -8,7 +8,6 @@ import MultiCountry from './pages/MultiCountry'
 import MultiSeries from './pages/MultiSeries'
 
 import useStyles from './utils/styles'
-import { createMenuHandler } from './utils/utils'
 
 const App = () => {
   const style = useStyles()
@@ -30,19 +29,19 @@ const App = () => {
       </AppBar>
       <Toolbar />
       <Switch>
-        <Route path='/' exact><Home /></Route>
-        <Route path='/multi' exact><MultiCountry /></Route>
+        <Route path='/' exact><Home setTitle={handleTitleChange} /></Route>
+        <Route path='/multicountry' exact><MultiCountry setTitle={handleTitleChange} /></Route>
         <Route path='/multiseries' exact><MultiSeries setTitle={handleTitleChange} /></Route>
       </Switch>
       <Drawer anchor='left' open={menuOpen} onClose={() => setMenuOpen(false)}>
         <List>
-          <ListItem button onClick={createMenuHandler('Home', setCurrentPage, setMenuOpen)} selected={currentPage === 'Home'} component={RouterLink} to={'/'}>
+          <ListItem button onClick={() => setMenuOpen(false)} selected={currentPage === 'Home'} component={RouterLink} to={'/'}>
             <ListItemText primary='Home' />
           </ListItem>
-          <ListItem button onClick={createMenuHandler('Multi', setCurrentPage, setMenuOpen)} selected={currentPage === 'Multi'} component={RouterLink} to='/multi'>
-            <ListItemText primary='Multi' />
+          <ListItem button onClick={() => setMenuOpen(false)} selected={currentPage === 'Multiple Countries'} component={RouterLink} to='/multicountry'>
+            <ListItemText primary='Multiple Countries' />
           </ListItem>
-          <ListItem button onClick={createMenuHandler('Multiple Series', setCurrentPage, setMenuOpen)} selected={currentPage === 'Multiple Series'} component={RouterLink} to='/multiseries'>
+          <ListItem button onClick={() => setMenuOpen(false)} selected={currentPage === 'Multiple Series'} component={RouterLink} to='/multiseries'>
             <ListItemText primary='Multiple Series' />
           </ListItem>
         </List>

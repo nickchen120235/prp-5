@@ -1,6 +1,14 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 
-const Home = () => {
+interface HomeProps {
+  setTitle: (title: string) => void
+}
+
+const Home = (props: HomeProps) => {
+  const {setTitle} = props
+
+  useEffect(() => setTitle('Home'), [])
+  
   return <p>Home</p>
 }
 

@@ -1,15 +1,23 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Container, List, ListItem, ListItemText, Dialog, DialogTitle, FormControl, FormGroup, FormControlLabel, Checkbox, Divider, Button, DialogActions } from '@material-ui/core'
 
 import country from '../utils/country'
 import useStyles from '../utils/styles'
 import { findKey } from '../utils/utils'
 
+interface MultiCountryProps {
+  setTitle: (title: string) => void
+}
+
 const name = Object.values(country).sort()
 
-const MultiCountry = () => {
-  const style = useStyles()
+const MultiCountry = (props: MultiCountryProps) => {
+  const { setTitle } = props
 
+  useEffect(() => setTitle('Multiple Countries'), [])
+
+  const style = useStyles()
+  
   /** states */
   const [selected, setSelected] = useState<string[]>([])
   const [open, setOpen] = useState(false)
