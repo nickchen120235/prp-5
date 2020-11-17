@@ -16,9 +16,7 @@ const MultiCountryChart = (props: MultiCountryChartProps) => {
       x: index+1990,
       y: (series === 'SP_RUR_TOTL' || series === 'SL_TLF_TOTL_IN')? value/data[countryKey]['SP_POP_TOTL'][index]*100: value
     })).filter(entry => !isNaN(entry.y))
-  ))
-
-  console.log(renderData)
+  )).filter(entry => entry.length !== 0)
 
   return (
     <VictoryChart theme={VictoryTheme.material}>
