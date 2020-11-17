@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from 'react'
-import { Container, List, ListItem, ListItemText, Dialog, DialogTitle, FormControl, FormGroup, FormControlLabel, Checkbox, Divider, Button, DialogActions } from '@material-ui/core'
+import { Container, List, ListItem, ListItemText, ListItemIcon, Dialog, DialogTitle, FormControl, FormGroup, FormControlLabel, Checkbox, Divider, Button, DialogActions, Radio } from '@material-ui/core'
+
+import MultiCountryChart from '../components/MultiCountryChart'
 
 import country from '../utils/country'
+import series from '../utils/series'
 import useStyles from '../utils/styles'
 import { findKey } from '../utils/utils'
 
@@ -10,6 +13,7 @@ interface MultiCountryProps {
 }
 
 const name = Object.values(country).sort()
+const seriesKey = Object.keys(series)
 
 const MultiCountry = (props: MultiCountryProps) => {
   const { setTitle } = props
@@ -17,10 +21,11 @@ const MultiCountry = (props: MultiCountryProps) => {
   useEffect(() => setTitle('Multiple Countries'), [])
 
   const style = useStyles()
-  
+
   /** states */
-  const [selected, setSelected] = useState<string[]>([])
+  const [selected, setSelected] = useState<string[]>(['CHN'])
   const [open, setOpen] = useState(false)
+  const [selectedSeries, setSelectedSeries] = useState('NY_GDP_MKTP_CD')
 
   /** handler */
   const handleToggle = (value: string) => () => {
@@ -50,16 +55,38 @@ const MultiCountry = (props: MultiCountryProps) => {
 
     setSelected(newSelected)
   }
+  const handleRadioSelect = (key: string) => () => {
+    setSelectedSeries(key)
+  }
 
   return (
-    <>
+    <div className={style.basediv}>
       <List className={style.countryList} disablePadding>
         <ListItem button onClick={() => setOpen(true)}>
-          <ListItemText primary='Select Country/Region' />
+          <ListItemText className={style.listTitle} primary='Select Country/Region' />
         </ListItem>
         <Divider />
-        {selected.map(code => country[code]).sort().map(name => <ListItem key={name} button onClick={handleDelete(findKey(name, country))}><ListItemText primary={name} /></ListItem>)}
+        {selected.map(code => country[code]).sort().map(name =>
+          <ListItem key={name} button onClick={handleDelete(findKey(name, country))}>
+            <ListItemText primary={name} />
+          </ListItem>
+        )}
       </List>
+      <Divider orientation='vertical' flexItem />
+      <List className={style.countryList} disablePadding>
+        <ListItem>
+          <ListItemText className={style.listTitle} primary='Choose One Series' />
+        </ListItem>
+        <Divider />
+        {seriesKey.map(code =>
+          <ListItem key={code}>
+            <ListItemIcon><Radio onChange={handleRadioSelect(code)} checked={selectedSeries === code} /></ListItemIcon>
+            <ListItemText primary={(code === 'SP_RUR_TOTL' || code === 'SL_TLF_TOTL_IN')? series[code].concat(' (% of total)'): series[code]} />
+          </ListItem>
+        )}
+      </List>
+      <Divider orientation='vertical' flexItem />
+      <MultiCountryChart country={selected} series={selectedSeries} />
       <Dialog open={open} fullWidth maxWidth={false} onClose={() => setOpen(false)}>
         <DialogTitle className={style.title}>Select Country/Region</DialogTitle>
         <FormControl component='fieldset'>
@@ -71,7 +98,7 @@ const MultiCountry = (props: MultiCountryProps) => {
           <Button variant='text' onClick={() => setOpen(false)} color='primary'>Close</Button>
         </DialogActions>
       </Dialog>
-    </>
+    </div>
   )
 }
 
