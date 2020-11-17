@@ -22,14 +22,15 @@ const useStyles = makeStyles(theme => ({
     marginLeft: '10px'
   },
   countryList: {
-    width: '25%',
+    width: '100%',
     marginLeft: '0',
     marginRight: '0',
     float: 'left'
   },
   basediv: {
     display: 'flex',
-    height: '100vh'
+    height: '100vh',
+    boxSizing: 'border-box'
   },
   listTitle: {
     textAlign: 'center'

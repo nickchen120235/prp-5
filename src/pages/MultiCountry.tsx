@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Container, List, ListItem, ListItemText, ListItemIcon, Dialog, DialogTitle, FormControl, FormGroup, FormControlLabel, Checkbox, Divider, Button, DialogActions, Radio } from '@material-ui/core'
+import { Box, List, ListItem, ListItemText, ListItemIcon, Dialog, DialogTitle, FormControl, FormGroup, FormControlLabel, Checkbox, Divider, Button, DialogActions, Radio } from '@material-ui/core'
 
 import MultiCountryChart from '../components/MultiCountryChart'
 
@@ -61,30 +61,34 @@ const MultiCountry = (props: MultiCountryProps) => {
 
   return (
     <div className={style.basediv}>
-      <List className={style.countryList} disablePadding>
-        <ListItem button onClick={() => setOpen(true)}>
-          <ListItemText className={style.listTitle} primary='Select Country/Region' />
-        </ListItem>
-        <Divider />
-        {selected.map(code => country[code]).sort().map(name =>
-          <ListItem key={name} button onClick={handleDelete(findKey(name, country))}>
-            <ListItemText primary={name} />
+      <Box style={{ maxHeight: '100%', overflow: 'auto', width: '30%' }}>
+        <List className={style.countryList} disablePadding>
+          <ListItem button onClick={() => setOpen(true)}>
+            <ListItemText className={style.listTitle} primary='Select Country/Region' />
           </ListItem>
-        )}
-      </List>
+          <Divider />
+          {selected.map(code => country[code]).sort().map(name =>
+            <ListItem key={name} button onClick={handleDelete(findKey(name, country))}>
+              <ListItemText primary={name} />
+            </ListItem>
+          )}
+        </List>
+      </Box>
       <Divider orientation='vertical' flexItem />
-      <List className={style.countryList} disablePadding>
-        <ListItem>
-          <ListItemText className={style.listTitle} primary='Choose One Series' />
-        </ListItem>
-        <Divider />
-        {seriesKey.map(code =>
-          <ListItem key={code}>
-            <ListItemIcon><Radio onChange={handleRadioSelect(code)} checked={selectedSeries === code} /></ListItemIcon>
-            <ListItemText primary={(code === 'SP_RUR_TOTL' || code === 'SL_TLF_TOTL_IN')? series[code].concat(' (% of total)'): series[code]} />
+      <Box style={{ maxHeight: '100%', overflow: 'auto', width: '30%' }}>
+        <List className={style.countryList} disablePadding>
+          <ListItem>
+            <ListItemText className={style.listTitle} primary='Choose One Series' />
           </ListItem>
-        )}
-      </List>
+          <Divider />
+          {seriesKey.map(code =>
+            <ListItem key={code}>
+              <ListItemIcon><Radio onChange={handleRadioSelect(code)} checked={selectedSeries === code} /></ListItemIcon>
+              <ListItemText primary={(code === 'SP_RUR_TOTL' || code === 'SL_TLF_TOTL_IN') ? series[code].concat(' (% of total)') : series[code]} />
+            </ListItem>
+          )}
+        </List>
+      </Box>
       <Divider orientation='vertical' flexItem />
       <MultiCountryChart country={selected} series={selectedSeries} />
       <Dialog open={open} fullWidth maxWidth={false} onClose={() => setOpen(false)}>
