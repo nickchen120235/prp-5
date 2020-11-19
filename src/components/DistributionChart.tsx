@@ -19,7 +19,7 @@ const DistributionChart = (props: DistributionProps) => {
 
   return(
     <VictoryChart theme={VictoryTheme.material} horizontal>
-      <VictoryHistogram data={renderData} colorScale='qualitative' bins={10} style={{data: {opacity:.5}}} labels={({datum}) => ([datum.x,datum.y])} labelComponent={<VictoryTooltip />} />
+      <VictoryHistogram data={renderData} colorScale='qualitative' style={{data: {opacity:.5}}} labels={({datum}) => (datum.y)} labelComponent={<VictoryTooltip />} />
     </VictoryChart>
   )
 }
