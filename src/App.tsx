@@ -3,7 +3,7 @@ import { Switch, Route, Link as RouterLink } from 'react-router-dom'
 import { AppBar, Toolbar, Typography, IconButton, Drawer, List, ListItem, ListItemText } from '@material-ui/core'
 import { Menu } from '@material-ui/icons'
 
-import Home from './pages/Home'
+import Distribution from './pages/Distribution'
 import MultiCountry from './pages/MultiCountry'
 import MultiSeries from './pages/MultiSeries'
 
@@ -29,14 +29,15 @@ const App = () => {
       </AppBar>
       <Toolbar />
       <Switch>
-        <Route path='/' exact><Home setTitle={handleTitleChange} /></Route>
+        <Route path='/' exact><Distribution setTitle={handleTitleChange} /></Route>
+        <Route path='/distribution' exact><Distribution setTitle={handleTitleChange} /></Route>
         <Route path='/multicountry' exact><MultiCountry setTitle={handleTitleChange} /></Route>
         <Route path='/multiseries' exact><MultiSeries setTitle={handleTitleChange} /></Route>
       </Switch>
       <Drawer anchor='left' open={menuOpen} onClose={() => setMenuOpen(false)}>
         <List>
-          <ListItem button onClick={() => setMenuOpen(false)} selected={currentPage === 'Home'} component={RouterLink} to={'/'}>
-            <ListItemText primary='Home' />
+          <ListItem button onClick={() => setMenuOpen(false)} selected={currentPage === 'Data Distribution'} component={RouterLink} to={'/distribution'}>
+            <ListItemText primary='Data Distribution' />
           </ListItem>
           <ListItem button onClick={() => setMenuOpen(false)} selected={currentPage === 'Multiple Countries'} component={RouterLink} to='/multicountry'>
             <ListItemText primary='Multiple Countries' />
