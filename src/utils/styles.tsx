@@ -34,6 +34,13 @@ const useStyles = makeStyles(theme => ({
   },
   listTitle: {
     textAlign: 'center'
+  },
+  countryDialog2: {
+    columns: 5,
+    margin: '5px'
+  },
+  countryButton: {
+    minWidth: '20px'
   }
 }))
 
