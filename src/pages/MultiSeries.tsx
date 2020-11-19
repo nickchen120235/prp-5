@@ -51,21 +51,21 @@ const MultiSeries = (props: MultiSeriesProps) => {
     setCountry(value)
   }
 
+  /** Row Generators */
   const TitleRow = (value: string[]) => (
     <>
       {value.map(series =>
         <Grid key={series} item xs>
-          <Paper className={style.listTitle}>{series}</Paper>
+          <Paper variant='outlined' className={style.listTitle}>{series}</Paper>
         </Grid>
       )}
     </>
   )
-
   const ChartRow = (x: string[], y: string, country: string) => (
     <>
       {x.map(xAxis =>
         <Grid key={xAxis} item xs>
-          <Paper>
+          <Paper variant='outlined'>
             <MultiSeriesChart x={xAxis} y={y} country={country} />
           </Paper>
         </Grid>
@@ -104,7 +104,6 @@ const MultiSeries = (props: MultiSeriesProps) => {
       </Box>
       <CountryDialog open={open} selected={country} onClose={handleCountryClose} />
     </div>
-
   )
 }
 
