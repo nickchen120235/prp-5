@@ -69,7 +69,7 @@ const MultiCountry = (props: MultiCountryProps) => {
           <Divider />
           {selected.map(code => country[code]).sort().map(name =>
             <ListItem key={name} button onClick={handleDelete(findKey(name, country))}>
-              <ListItemText primary={name} />
+              <ListItemText primary={`${name} (${findKey(name, country)})`} />
             </ListItem>
           )}
         </List>
