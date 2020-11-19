@@ -22,10 +22,12 @@ const Distribution = (props: DistributionProps) => {
   /** states */
   const [year, setYear] = useState(2010)
   const [selected, setSelected] = useState('NY_GDP_MKTP_CD')
+  const [numOfNaN, setNumOfNaN] = useState(0)
 
   /** handlers */
   const handleYearChange = (year: number) => () => setYear(year)
   const handleSeriesChange = (series: string) => () => setSelected(series)
+  const num = (value: number) => setNumOfNaN(value)
 
   return (
     <div className={style.basediv}>
@@ -46,7 +48,7 @@ const Distribution = (props: DistributionProps) => {
       <Box style={{ maxHeight: '100%', overflow: 'auto', width: 550 }}>
         <List className={style.countryList} disablePadding>
           <ListItem>
-            <ListItemText className={style.listTitle} primary={`Select a series: ${selected}`} />
+            <ListItemText className={style.listTitle} primary={`Select a series: ${selected}`} secondary={`Number of NaN: ${numOfNaN}`} />
           </ListItem>
           <Divider />
           {seriesKey.map(value =>
@@ -57,7 +59,7 @@ const Distribution = (props: DistributionProps) => {
           )}
         </List>
       </Box>
-      <DistributionChart year={year} series={selected} />
+      <DistributionChart year={year} series={selected} numOfNaN={num} />
     </div>
   )
 }
