@@ -29,7 +29,7 @@ const useStyles = makeStyles(theme => ({
   },
   basediv: {
     display: 'flex',
-    height: '100vh',
+    height: 'calc(100vh - 64px)',
     boxSizing: 'border-box'
   },
   listTitle: {
