@@ -24,8 +24,8 @@ const MultiSeries = (props: MultiSeriesProps) => {
   const style = useStyles()
 
   /** states */
-  const [selected, setSelected] = useState<string[]>([seriesCode[0], seriesCode[1]])
-  const [country, setCountry] = useState<string>('VCT')
+  const [selected, setSelected] = useState<string[]>([seriesCode[2], seriesCode[1]])
+  const [country, setCountry] = useState<string>('CHN')
   const [open, setOpen] = useState(false)
 
   /** handlers */
