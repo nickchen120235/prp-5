@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from 'react'
-import { Container, FormControl, FormLabel, FormGroup, FormControlLabel, Checkbox } from '@material-ui/core'
+import { Box, Checkbox, List, ListItem, ListItemIcon, ListItemText, Divider } from '@material-ui/core'
 
 import series from '../utils/series'
 import useStyles from '../utils/styles'
+import country from '../utils/country'
+
+const countryList = country // Rename
 
 const seriesCode = Object.keys(series)
 
@@ -19,7 +22,7 @@ const MultiSeries = (props: MultiSeriesProps) => {
 
   /** states */
   const [selected, setSelected] = useState<string[]>([seriesCode[0]])
-  const [country, setCountry] = useState<string>('CHN')
+  const [country, setCountry] = useState<string>('VCT')
 
   /** handlers */
   const handleToggle = (value: string) => () => {
@@ -37,19 +40,24 @@ const MultiSeries = (props: MultiSeriesProps) => {
   }
 
   return (
-    <>
-      <Container className={style.selector} maxWidth={false}>
-        <FormControl component='fieldset'>
-          <FormLabel component='legend'>Series</FormLabel>
-          <FormGroup>
-            {seriesCode.map(value => <FormControlLabel key={value} control={<Checkbox checked={selected.indexOf(value) !== -1} onChange={handleToggle(value)} name={value} />} label={series[value]} />)}
-          </FormGroup>
-        </FormControl>
-      </Container>
-      <Container className={style.graph} maxWidth={false}>
-        {selected.map(value => <p key={value}>{value}</p>)}
-      </Container>
-    </>
+    <div className={style.basediv}>
+      <Box style={{ maxHeight: '100%', overflow: 'auto', width: '35%' }}>
+        <List className={style.countryList} disablePadding>
+          <ListItem button>
+            <ListItemText className={style.listTitle} primary={`Select Country: ${countryList[country]}`} secondary='select series below' />
+          </ListItem>
+          <Divider />
+          {seriesCode.map(code =>
+            <ListItem key={code}>
+              <ListItemIcon><Checkbox onChange={handleToggle(code)} checked={selected.indexOf(code) !== -1} /></ListItemIcon>
+              <ListItemText primary={series[code]} secondary={code} />
+            </ListItem>
+          )}
+        </List>
+      </Box>
+      <Divider orientation='vertical' flexItem />
+      {selected.map(value => <p key={value}>{value}</p>)}
+    </div>
   )
 }
 
