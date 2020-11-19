@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Box, Checkbox, List, ListItem, ListItemIcon, ListItemText, Divider, Grid, Paper } from '@material-ui/core'
+import { Box, Checkbox, List, ListItem, ListItemIcon, ListItemText, Divider, Grid, Paper, Tooltip } from '@material-ui/core'
 
 import CountryDialog from '../components/CountryDialog'
 import MultiSeriesChart from '../components/MultiSeriesChart'
@@ -7,6 +7,8 @@ import MultiSeriesChart from '../components/MultiSeriesChart'
 import series from '../utils/series'
 import useStyles from '../utils/styles'
 import country from '../utils/country'
+import data from '../utils/data'
+import {correlation} from '../utils/utils'
 
 const countryList = country // Rename
 
@@ -63,13 +65,18 @@ const MultiSeries = (props: MultiSeriesProps) => {
   )
   const ChartRow = (x: string[], y: string, country: string) => (
     <>
-      {x.map(xAxis =>
-        <Grid key={xAxis} item xs>
-          <Paper variant='outlined'>
-            <MultiSeriesChart x={xAxis} y={y} country={country} />
-          </Paper>
-        </Grid>
-      )}
+      {x.map(xAxis => {
+        const cor = correlation(data[country][xAxis], data[country][y])
+        return (
+          <Grid key={xAxis} item xs>
+            <Tooltip title={<div><p>X: {xAxis}</p><p>Y: {y}</p><p>Correlation: {cor}</p></div>} placement='top' arrow>
+              <Paper variant='outlined'>
+                <MultiSeriesChart x={xAxis} y={y} country={country} />
+              </Paper>
+            </Tooltip>
+          </Grid>
+        )
+      })}
     </>
   )
 
