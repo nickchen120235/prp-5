@@ -29,10 +29,10 @@ const Distribution = (props: DistributionProps) => {
 
   return (
     <div className={style.basediv}>
-      <Box style={{ maxHeight: '100%', overflow: 'auto', width: 200 }}>
+      <Box style={{ maxHeight: '100%', overflow: 'auto', width: 350 }}>
         <List className={style.countryList} disablePadding>
           <ListItem>
-            <ListItemText className={style.listTitle} primary={`Select a year: ${year}`} />
+            <ListItemText className={style.listTitle} primary={`Select a year : ${year}`} />
           </ListItem>
           <Divider />
           {Array.from({ length: 26 }, (v, k) => k + 1990).map(value =>
@@ -43,7 +43,7 @@ const Distribution = (props: DistributionProps) => {
           )}
         </List>
       </Box>
-      <Box style={{ maxHeight: '100%', overflow: 'auto', width: 350 }}>
+      <Box style={{ maxHeight: '100%', overflow: 'auto', width: 550 }}>
         <List className={style.countryList} disablePadding>
           <ListItem>
             <ListItemText className={style.listTitle} primary={`Select a series: ${selected}`} />

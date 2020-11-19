@@ -61,10 +61,10 @@ const MultiCountry = (props: MultiCountryProps) => {
 
   return (
     <div className={style.basediv}>
-      <Box style={{ maxHeight: '100%', overflow: 'auto', width: '30%' }}>
+      <Box style={{ maxHeight: '100%', overflow: 'auto', width: 350 }}>
         <List className={style.countryList} disablePadding>
           <ListItem button onClick={() => setOpen(true)}>
-            <ListItemText className={style.listTitle} primary='Select Country/Region' />
+            <ListItemText className={style.listTitle} primary='Select Country' />
           </ListItem>
           <Divider />
           {selected.map(code => country[code]).sort().map(name =>
@@ -75,7 +75,7 @@ const MultiCountry = (props: MultiCountryProps) => {
         </List>
       </Box>
       <Divider orientation='vertical' flexItem />
-      <Box style={{ maxHeight: '100%', overflow: 'auto', width: '30%' }}>
+      <Box style={{ maxHeight: '100%', overflow: 'auto', width: 400 }}>
         <List className={style.countryList} disablePadding>
           <ListItem>
             <ListItemText className={style.listTitle} primary='Choose One Series' />
