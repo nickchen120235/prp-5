@@ -37,7 +37,7 @@ const Distribution = (props: DistributionProps) => {
             <ListItemText className={style.listTitle} primary={`Select a year : ${year}`} />
           </ListItem>
           <Divider />
-          {Array.from({ length: 26 }, (v, k) => k + 1990).map(value =>
+          {Array.from({ length: 25 }, (v, k) => k + 1990).map(value =>
             <ListItem key={value}>
               <ListItemIcon><Radio onChange={handleYearChange(value)} checked={value === year} /></ListItemIcon>
               <ListItemText primary={value} />
